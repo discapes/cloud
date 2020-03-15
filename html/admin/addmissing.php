@@ -25,6 +25,7 @@ foreach ($filelist as $filename) {
         $stmt = $conn->prepare("INSERT INTO Files (id, filename, date) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $randomid, $filename, $date);
         $stmt->execute();
+        echo $conn->errno . ": " . $conn->error . "<br>";
         echo nl2br("<h2 style=\"margin-top:-40px;text-align:center;color:blue\">" . $filename . "</h2>\n");
     }
 }

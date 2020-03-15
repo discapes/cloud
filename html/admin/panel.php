@@ -22,13 +22,12 @@
 			<input type="submit" value="Files" />
 		</form>
 		<br>
-		<form action="trashlog">
-			<input type="submit" value="Trash" />
-		</form>
-		<br>
 		<form action="uploadhand" method="post" enctype="multipart/form-data">
 			<input style="margin-left: 155px" type="file" name="upload" required>
-			<br> <br> <input type="submit" value="Upload" name="submit">
+			<br><br>
+			<input type="checkbox" name="isPaste" value="yes">
+ 			 <label for="vehicle1">Paste?</label><br>
+			<br> <input type="submit" value="Upload" name="submit">
 		</form>
 	</div>
 </body>

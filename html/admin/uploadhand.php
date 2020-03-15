@@ -40,18 +40,23 @@ if (move_uploaded_file($_FILES["upload"]["tmp_name"], $uploadpath)) {
     // break;
     // }
     // }
-
+    
+    if($_POST["isPaste"] == "yes") {
+        $isPaste = "1";
+    } else {
+        $isPaste = "0";
+    }
     $randomid = generate();
     $date = date("H:i d.m.Y");
-    $stmt = $conn->prepare("INSERT INTO Files (id, filename, date) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $randomid, $uploadname, $date);
+    $stmt = $conn->prepare("INSERT INTO Files (id, filename, date, isPaste) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $randomid, $uploadname, $date, $isPaste);
     $stmt->execute();
     $conn->close();
 
     echo nl2br($randomid . "\n");
     echo nl2br($uploadname . "\n");
     echo $date;
-
+    
     echo '<h1 style="margin-top:100px;text-align:center;color:green">Success!</h1>';
     ob_flush();
     flush();
