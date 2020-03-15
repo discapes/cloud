@@ -37,7 +37,7 @@
                     $id = $row["id"];
                     echo '
                             <br id="copybr1">
-                             <input style="width:390px;text-align:center" type="text" id="linkfield" value="192.168.0.137/get?id=b8da45c7-1023-4e55-9328-3fad5cd81a62" readonly><br id="copybr3">
+                             <input style="width:390px;text-align:center" type="text" id="linkfield" value="192.168.0.137/get?id='.$id.'" readonly><br id="copybr3">
                             <button type="button" id="copybut" onclick="copyF()">Copy link</button>
                             <span id="validfile" hidden=true style="color:green">Link copied to clipboard!</span>
                         <br id="copybr2">
