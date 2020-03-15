@@ -45,7 +45,7 @@ tr:nth-child(even) {
         <?php
         require '../mysql.php';
         ?>
-        <title>IP Log</title>
+        <title>Del IP Log</title>
 <link rel="icon" type="image/png" href="../favicon.png">
 </head>
 <body style="background-image: url('../lightbg.png')">
@@ -57,17 +57,17 @@ tr:nth-child(even) {
 		<input type="submit" value="Refresh" />
 	</form>
 	<br>
-	<form action="deliplog">
-		<input type="submit" value="Deleted IPs" />
+	<form action="iplog">
+		<input type="submit" value="IP Log" />
 	</form>
 	<br>
 	<div align="center">
             <?php
-            $sql = "SELECT num, ip, hostname, date FROM IPlog ORDER BY num DESC";
+            $sql = "SELECT num, ip, hostname, date FROM DelIPlog ORDER BY num DESC";
             $result = $conn->query($sql);
-            echo "<table style=\"width:1100px;float:left\"><tr><th style=\"width:10px\">Num</th><th>IP</th><th>Hostname</th><th style=\"width:130px\">Date</th><th style=\"width:60px\">Delete?</th></tr>";
+            echo "<table style=\"width:1100px;float:left\"><tr><th style=\"width:10px\">Num</th><th>IP</th><th>Hostname</th><th style=\"width:130px\">Date</th><th style=\"width:70px\">Restore?</th></tr>";
             while ($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["num"] . "</td><td style=\"color:green\">" . $row["ip"] . "</td><td>" . $row["hostname"] . "</td><td>" . $row["date"] . "</td><td><a style=\"color: red\" href=removeip?num=" . $row["num"] . ">DELETE</a></td></tr>";
+                echo "<tr><td>" . $row["num"] . "</td><td style=\"color:green\">" . $row["ip"] . "</td><td>" . $row["hostname"] . "</td><td>" . $row["date"] . "</td><td><a style=\"color: blue\" href=restoreip?num=" . $row["num"] . ">RESTORE</a></td></tr>";
             }
             echo "</table>";
             ?>

@@ -19,10 +19,11 @@
 			<input type="text" placeholder="File name" name="filename" required>
 			<br>
           <?php
+          error_reporting(0);
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($_POST["submit"] == "Download (POST)") {
                 $invalidfile = false;
-                checkPath($_POST["filename"]);
+                checkPath($_POST["filename"], "files");
                 if ($invalidfile == true) {
                     echo "<span id=\"invalidfile\" style=\"color:red\">Invalid file!</span>
 	                       <script>

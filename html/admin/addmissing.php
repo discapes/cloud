@@ -35,6 +35,6 @@ if (!$anyfiles) {
 ob_flush();
 flush();
 sleep(5);
-echo "<script>location.href='../home'</script>";
+echo "<script>location.href='filelog'</script>";
 ?>
 </html>

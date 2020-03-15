@@ -1,9 +1,9 @@
 <?php
 
-function checkPath($filename)
+function checkPath($filename, $folder)
 {
     // $filename = ($_POST["name"]);
-    $filepath = "/var/www/files/" . $filename;
+    $filepath = "/var/www/".$folder."/" . $filename;
     $realfilepath = realpath($filepath);
     if ($filepath === $realfilepath) {
         echo $realfilepath;

@@ -57,6 +57,10 @@ tr:nth-child(even) {
 		<input type="submit" value="Add missing files to table" />
 	</form>
 	<br>
+	<form action="files">
+		<input type="submit" value="Files (Deprecated)" />
+	</form>
+	<br>
 	<form>
 		<input type="submit" value="Refresh" />
 	</form>

@@ -6,15 +6,15 @@
 </head>
 <body style="background-image: url('lightbg.png')">
 	<?php
-require 'mysql.php';
-require 'download.php';
+require '../mysql.php';
+require '../download.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $getid = $_GET["id"];
-    $query = "SELECT filename FROM Files WHERE id=\"$getid\"";
+    $query = "SELECT filename FROM Trash WHERE id=\"$getid\"";
     $result = $conn->query($query);
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        checkPath($row["filename"], "files");
+        checkPath($row["filename"], "trash");
         echo "<script>location.href='../home'</script>";
     } else {
 

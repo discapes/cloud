@@ -8,7 +8,7 @@
 	?>
     </head>
 <body style="background-image: url('../lightbg.png'); line-height: 2">
-	<form action="panel">
+	<form action="filelog">
 		<input type="submit" value="Back" />
 	</form>
 	<form>
