@@ -1,0 +1,5 @@
+DirectoryIndex panel.php
+AuthName "Upload"
+AuthType Basic
+AuthUserFile /var/www/.htpasswd
+require valid-user
