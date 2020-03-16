@@ -29,6 +29,10 @@
  			 <label for="vehicle1">Paste?</label><br>
 			<br> <input type="submit" value="Upload" name="submit">
 		</form>
+		<br>
+		<form action="newpaste">
+			<input type="submit" value="New Paste" />
+		</form>
 	</div>
 </body>
 </html>
