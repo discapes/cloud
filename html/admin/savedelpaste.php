@@ -42,7 +42,7 @@ if ($_GET["new"] == "yes") {
                       document.body.appendChild(form);
                       form.submit();
                     }
-                    post('newpaste?invalidfile=yes&new=yes&filename=" . $_POST["filename"] . "',  {paste: '" . $paste . "'});
+                    post('newdelpaste?invalidfile=yes&new=yes&filename=" . $_POST["filename"] . "',  {paste: '" . $paste . "'});
                     </script>";
     $stmt = $conn->prepare("SELECT filename FROM Files WHERE filename=(?)");
     $stmt->bind_param("s", $filename);
@@ -50,18 +50,16 @@ if ($_GET["new"] == "yes") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        $stmt = $conn->prepare("SELECT filename FROM Files WHERE filename=(?)");
+        $stmt = $conn->prepare("SELECT filename FROM Trash WHERE filename=(?)");
         $stmt->bind_param("s", $filename);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 0) {
-            $basepath = "/var/www/files/";
-            $filepath = $basepath . $filename;
 
             $isPaste = "1";
             $randomid = generate();
             $date = date("H:i d.m.Y");
-            $stmt = $conn->prepare("INSERT INTO Files (id, filename, date, isPaste) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO Trash (id, filename, date, isPaste) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sssi", $randomid, $filename, $date, $isPaste);
             $stmt->execute();
             $conn->close();
@@ -69,7 +67,7 @@ if ($_GET["new"] == "yes") {
             echo nl2br($randomid . "\n");
             echo nl2br($filename . "\n");
             echo $date;
-            file_put_contents("/var/www/files/" . $filename, $paste);
+            file_put_contents("/var/www/trash/" . $filename, $paste);
             echo '<h1 style="margin-top:100px;text-align:center;color:green">Success!</h1>';
             ob_flush();
             flush();
@@ -82,10 +80,8 @@ if ($_GET["new"] == "yes") {
         echo $filereserved;
     }
 } else {
-    $basepath = "/var/www/files/";
-    $filepath = $basepath . $filename;
     $date = date("H:i d.m.Y");
-    $stmt = $conn->prepare("UPDATE Files SET date=(?) WHERE filename=(?)");
+    $stmt = $conn->prepare("UPDATE Trash SET date=(?) WHERE filename=(?)");
     $stmt->bind_param("s", $date, $filename);
     $stmt->execute();
     $conn->close();
@@ -93,12 +89,12 @@ if ($_GET["new"] == "yes") {
     echo nl2br($randomid . "\n");
     echo nl2br($filename . "\n");
     echo $date;
-    file_put_contents("/var/www/files/" . $filename, $paste);
+    file_put_contents("/var/www/trash/" . $filename, $paste);
     echo '<h1 style="margin-top:100px;text-align:center;color:green">Success!</h1>';
     ob_flush();
     flush();
     sleep(2);
-    echo "<script>location.href='filelog'</script>";
+    echo "<script>location.href='trashlog'</script>";
 }
 ?>
 </html>

@@ -11,13 +11,13 @@
 if (isset($_POST["paste"])) {
     $paste = $_POST["paste"];
 } elseif (! ($_GET["new"] == "yes")) {
-    $paste = file_get_contents("/var/www/files/" . $_GET["filename"]);
+    $paste = file_get_contents("/var/www/trash/" . $_GET["filename"]);
 }
 
 if ($_GET["new"] == "yes") {
-    echo '<form action="savepaste?new=yes" method="post">';
+    echo '<form action="savedelpaste?new=yes" method="post">';
 } else {
-    echo '<form action="savepaste" method="post">';
+    echo '<form action="savedelpaste" method="post">';
 }
 
 if (isset($_GET["filename"])) {
@@ -42,7 +42,7 @@ if ($_GET["invalidfile"] == "yes") {
 if ($_GET["new"] == "yes") {
     echo '<button type="button" onclick="window.location.href = \'panel\';">Back</button> <br>';
 } else {
-    echo '<button type="button" onclick="window.location.href = \'filelog\';">Back</button> <br>';
+    echo '<button type="button" onclick="window.location.href = \'trashlog\';">Back</button> <br>';
 }
 
 echo '<br>';

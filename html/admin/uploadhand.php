@@ -27,6 +27,21 @@ while (true) {
         $manycopies = $manycopies + 1;
     }
 }
+while (true) {
+    $stmt = $conn->prepare("SELECT filename FROM Trash WHERE filename=(?)");
+    $stmt->bind_param("s", $uploadname);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows == 0) {
+        break;
+    } else {
+        
+        $uploadname = substr_replace($basename, " (" . $manycopies . ")", $dotpos, 0);
+        $manycopies = $manycopies + 1;
+    }
+}
+
 $basepath = "/var/www/files/";
 $uploadpath = $basepath . $uploadname;
 
@@ -61,7 +76,7 @@ if (move_uploaded_file($_FILES["upload"]["tmp_name"], $uploadpath)) {
     ob_flush();
     flush();
     sleep(2);
-    echo "<script>location.href='../home'</script>";
+    echo "<script>location.href='panel'</script>";
 } else {
     echo nl2br($randomid . "\n");
     echo nl2br($uploadname . "\n");
