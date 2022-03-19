@@ -47,7 +47,7 @@ CREATE TABLE `trash` (
 
 ```
 
-Remember to `git update-index --assume-unchanged files trash mysql.php`.
+Remember to create directories `files` and `trash`, then `git update-index --assume-unchanged files trash html/mysql.php`.
 
 Just do `AllowOverride FileInfo AuthConfig`, `Options FollowSymLinks` and `HostnameLookups On`.
 
