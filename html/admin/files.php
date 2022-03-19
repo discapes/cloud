@@ -18,7 +18,8 @@
 	    <?php
     $filelist = $conn->query("SELECT id, filename FROM Files");
     while ($row = $filelist->fetch_assoc()) {
-        // $dir = "/var/www/files/";
+        // require '../variables.php';
+        // $dir = $rootdir . "files/";
         // $filelist = preg_grep('/^([^.])/', scandir($dir));
         // foreach ($filelist as $filename) {
         // meni niin pitkaan etten voi poistaa

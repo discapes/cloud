@@ -1,7 +1,7 @@
 <?php
 	$servername = "localhost";
-	$username = "root";
+	$username = "cloud";
 	$password = "password123!";
-	$dbname = "ServerDB";
+	$dbname = "clouddb";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 ?>

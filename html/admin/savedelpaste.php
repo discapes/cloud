@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Admin Panel</title>
-<link rel="icon" type="image/png" href="../favicon.png">
-	<?php require '../uuid.php'; require '../mysql.php'; ?>
-    </head>
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <?php require '../uuid.php';
+    require '../mysql.php'; ?>
+</head>
+
 <body style="background-image: url('../lightbg.png')">
 </body>
 <?php
+require '../variables.php';
 $filename = $_POST["filename"];
 $paste = $_POST["text"];
-if ($_GET["new"] == "yes") {
+if (isset($_GET["new"]) && $_GET["new"] == "yes") {
     $filereserved = "
                     <script>
                      /**
@@ -67,11 +71,11 @@ if ($_GET["new"] == "yes") {
             echo nl2br($randomid . "\n");
             echo nl2br($filename . "\n");
             echo $date;
-            file_put_contents("/var/www/trash/" . $filename, $paste);
+            file_put_contents($rootdir . "trash/" . $filename, $paste);
             echo '<h1 style="margin-top:100px;text-align:center;color:green">Success!</h1>';
             ob_flush();
             flush();
-            sleep(2);
+            sleep(1);
             echo "<script>location.href='panel'</script>";
         } else {
             echo $filereserved;
@@ -82,19 +86,20 @@ if ($_GET["new"] == "yes") {
 } else {
     $date = date("H:i d.m.Y");
     $stmt = $conn->prepare("UPDATE Trash SET date=(?) WHERE filename=(?)");
-    $stmt->bind_param("s", $date, $filename);
+    $stmt->bind_param("ss", $date, $filename);
     $stmt->execute();
     $conn->close();
 
-    echo nl2br($randomid . "\n");
+    if(isset($randomid)) echo nl2br($randomid . "\n");
     echo nl2br($filename . "\n");
     echo $date;
-    file_put_contents("/var/www/trash/" . $filename, $paste);
+    file_put_contents($rootdir . "trash/" . $filename, $paste);
     echo '<h1 style="margin-top:100px;text-align:center;color:green">Success!</h1>';
     ob_flush();
     flush();
-    sleep(2);
+    sleep(1);
     echo "<script>location.href='trashlog'</script>";
 }
 ?>
+
 </html>

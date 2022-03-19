@@ -7,6 +7,7 @@
 <body style="background-image: url('lightbg.png')">
 	<?php
 require '../mysql.php';
+require '../variables.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $getnum = $_GET["num"];
     $query = "SELECT filename FROM Files WHERE num=\"$getnum\"";
@@ -14,10 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($result->num_rows == 1) {
         echo "<script>location.href='filelog'</script>";
         $row = $result->fetch_assoc();
-        $filetodel = "n184148124";
         $filetodel = $row["filename"];
-        rename('/var/www/files/'.$filetodel, '/var/www/trash/'.$filetodel);
-        #unlink("/var/www/files/".$filetodel);
+        rename($rootdir . 'files/' .$filetodel, $rootdir . 'trash/'.$filetodel);
+        #unlink($rootdir . "files/".$filetodel);
         $query = 'INSERT INTO Trash SELECT * FROM Files WHERE num="'.$getnum.'"';
         $conn->query($query);
         $query = 'DELETE FROM Files WHERE num="'.$getnum.'"'; 
@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo '<h1 style="margin-top:100px;text-align:center;color:red">Invalid file number</h1>';
         ob_flush();
         flush();
-        sleep(2);
-        echo "<script>location.href='../home'</script>";
+        sleep(1);
+        echo "<script>location.href='/'</script>";
     }
 }
 ?>

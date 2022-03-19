@@ -1,9 +1,12 @@
 <?php
 
+require "variables.php";
+
 function checkPath($filename, $folder)
 {
-    // $filename = ($_POST["name"]);
-    $filepath = "/var/www/".$folder."/" . $filename;
+    //$filename = ($_POST["name"]);
+    global $rootdir, $separator;
+    $filepath = $rootdir . $folder . $separator . $filename;
     $realfilepath = realpath($filepath);
     if ($filepath === $realfilepath) {
         echo $realfilepath;
@@ -11,6 +14,11 @@ function checkPath($filename, $folder)
     } else {
         global $invalidfile;
         $invalidfile = true;
+        echo '<h1 style="margin-top:100px;text-align:center;color:red">Invalid file</h1>';
+        ob_flush();
+        flush();
+        sleep(1);
+        echo "<script>location.href='/'</script>";
     }
 }
 

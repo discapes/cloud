@@ -1,6 +1,3 @@
-# add landing page
-DirectoryIndex home.php
-
 # enable url rewriting
 RewriteEngine On 
 

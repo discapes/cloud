@@ -8,6 +8,7 @@
 	<?php
 require '../mysql.php';
 require '../download.php';
+require '../variables.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $getid = $_GET["id"];
     $query = "SELECT filename, isPaste FROM Trash WHERE id=\"$getid\"";
@@ -16,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $row = $result->fetch_assoc();
         $filename = $row["filename"];
         if ($row["isPaste"]) {
-            $filepath = "/var/www/trash/" . $filename;
+            $filepath = $rootdir . "trash" . $separator . $filename;
             $realfilepath = realpath($filepath);
             if ($filepath === $realfilepath) {
                 echo nl2br(file_get_contents($realfilepath));
             }
         } else {
             checkPath($filename, "trash");
-            echo "<script>location.href='../home'</script>";
+            echo "<script>location.href='/'</script>";
         }
         
     } else {
@@ -31,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo '<h1 style="margin-top:100px;text-align:center;color:red">Invalid file UUID</h1>';
         ob_flush();
         flush();
-        sleep(2);
-        echo "<script>location.href='../home'</script>";
+        sleep(1);
+        echo "<script>location.href='/'</script>";
     }
 }
 ?>

@@ -74,7 +74,7 @@ tr:nth-child(even) {
             <?php
             $sql = "SELECT num, id, filename, date, isPaste FROM Files ORDER BY num desc";
             $result = $conn->query($sql);
-            echo "<table style=\"margin-top: -200px;width:1100px;float:center\"><tr><th style=\"width:10px\">Num</tf><th>UUID (<span style=\"color: green\">link to file</span>)</th><th>Filename</th><th style=\"width:130px\">Date</th><th style=\"width:60px\">Delete?</th><th style=\"width:55px\">Type</th></tr>";
+            echo "<table style=\"margin-top: -200px;width:1100px;float:center\"><tr><th style=\"width:10px\">Num</tf><th>UUID (<span style=\"color: green\">link to file</span>)</th><th>Filename (<span style=\"color: sienna\">edit file</span>)</th><th style=\"width:130px\">Date</th><th style=\"width:60px\">Delete?</th><th style=\"width:55px\">Type</th></tr>";
             while ($row = $result->fetch_assoc()) {
                 echo "<tr><td>" . $row["num"] . "</td><td><a href=\"../get?id=" . $row["id"] . "\">" . $row["id"] . "</a></td><td><a style=\"color: sienna\" href=\"newpaste?filename=" . $row["filename"] . "\">" . $row["filename"] . "</a></td><td>" . $row["date"] . "</td><td><a style=\"color: red\" href=removefile?num=" . $row["num"] . ">DELETE</a></td><td>";
                 if ($row["isPaste"]) {

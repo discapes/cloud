@@ -9,7 +9,8 @@
 </body>
 
 <?php
-$dir = "/var/www/files/";
+require '../variables.php';
+$dir = $rootdir . "files/";
 $filelist = preg_grep('/^([^.])/', scandir($dir));
 echo "<h1>Files added:</h1>";
 $anyfiles = false;
@@ -22,10 +23,11 @@ foreach ($filelist as $filename) {
         $anyfiles = true;
         $randomid = generate();
         $date = date("H:i d.m.Y");
-        $stmt = $conn->prepare("INSERT INTO Files (id, filename, date) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $randomid, $filename, $date);
+        $isPaste = str_ends_with($filename, ".txt");
+        $stmt = $conn->prepare("INSERT INTO Files (id, filename, date, isPaste) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $randomid, $filename, $date, $isPaste);
         $stmt->execute();
-        echo $conn->errno . ": " . $conn->error . "<br>";
+        echo "<br>";
         echo nl2br("<h2 style=\"margin-top:-40px;text-align:center;color:blue\">" . $filename . "</h2>\n");
     }
 }

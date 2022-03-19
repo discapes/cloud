@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo '<h1 style="margin-top:100px;text-align:center;color:red">Invalid IP number</h1>';
         ob_flush();
         flush();
-        sleep(2);
-        echo "<script>location.href='../home'</script>";
+        sleep(1);
+        echo "<script>location.href='/'</script>";
     }
 }
 ?>

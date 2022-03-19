@@ -6,12 +6,8 @@
 </head>
 <body style="background-image: url('../lightbg.png')">
 	<div style="margin-top: 100px" align="center">
-		<form action="../home">
+		<form action="/">
 			<input type="submit" value="Back" />
-		</form>
-		<br>
-		<form>
-			<input type="submit" value="Refresh" />
 		</form>
 		<br>
 		<form action="iplog">

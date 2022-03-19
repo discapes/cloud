@@ -42,7 +42,8 @@ while (true) {
     }
 }
 
-$basepath = "/var/www/files/";
+require '../variables.php';
+$basepath = $rootdir . "files/";
 $uploadpath = $basepath . $uploadname;
 
 if (move_uploaded_file($_FILES["upload"]["tmp_name"], $uploadpath)) {
@@ -75,7 +76,7 @@ if (move_uploaded_file($_FILES["upload"]["tmp_name"], $uploadpath)) {
     echo '<h1 style="margin-top:100px;text-align:center;color:green">Success!</h1>';
     ob_flush();
     flush();
-    sleep(2);
+    sleep(1);
     echo "<script>location.href='panel'</script>";
 } else {
     echo nl2br($randomid . "\n");
@@ -85,7 +86,7 @@ if (move_uploaded_file($_FILES["upload"]["tmp_name"], $uploadpath)) {
     ob_flush();
     flush();
     sleep(5);
-    // echo "<script>location.href='../home'</script>";
+    // echo "<script>location.href='/'</script>";
 }
 ?>
 </html>

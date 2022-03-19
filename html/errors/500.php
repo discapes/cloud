@@ -9,8 +9,8 @@
 	echo '<h1 style="margin-top:300px;text-align:center;color:red">Something went wrong!</h1>';
 	ob_flush();
 	flush();
-	sleep(2);
-	echo "<script>location.href='../home'</script>";
+	sleep(1);
+	echo "<script>location.href='/'</script>";
 	?>
 </body>
 </html>
