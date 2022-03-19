@@ -2,8 +2,11 @@
 require 'mysql.php';
 error_reporting(E_ALL & ~E_NOTICE);
 $ip = $_SERVER['REMOTE_ADDR'];
-$sql = "SELECT ip FROM IPlog WHERE ip='$ip'";
-$result = $conn->query($sql);
+
+$stmt = $conn->prepare("SELECT ip FROM IPlog WHERE ip=?");
+$stmt->bind_param("s", $ip);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows == 0) {
     try { $hostname = $_SERVER['REMOTE_HOST']; 

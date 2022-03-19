@@ -21,3 +21,7 @@ RewriteRule ^ %{REQUEST_URI}.php [NC,L]
 ErrorDocument 404 /errors/404
 ErrorDocument 403 /errors/403
 ErrorDocument 500 /errors/500
+
+php_value upload_max_filesize   1000000000;
+php_value post_max_size 1000000000;
+# gb

@@ -11,8 +11,13 @@ require 'download.php';
 require 'variables.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $getid = $_GET["id"];
-    $query = "SELECT filename, isPaste FROM Files WHERE id=\"$getid\"";
-    $result = $conn->query($query);
+
+    $stmt = $conn->prepare("SELECT filename, isPaste FROM Files WHERE id=?");
+    $stmt->bind_param("s", $getid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         $filename = $row["filename"];
