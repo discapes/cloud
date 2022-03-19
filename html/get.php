@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $filepath = "/var/www/files/" . $filename;
             $realfilepath = realpath($filepath);
             if ($filepath === $realfilepath) {
-                echo file_get_contents($realfilepath);
+                echo nl2br(file_get_contents($realfilepath));
             }
         } else {
             checkPath($filename, "files");
