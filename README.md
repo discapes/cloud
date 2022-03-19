@@ -52,3 +52,5 @@ Remember to `git update-index --assume-unchanged files trash mysql.php`.
 Just do `AllowOverride FileInfo AuthConfig`, `Options FollowSymLinks` and `HostnameLookups On`.
 
 Finally, edit `variables.php` to fit your server.
+
+### Warning: lots of SQL injection vulnerabilities inside
