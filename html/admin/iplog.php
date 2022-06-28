@@ -63,8 +63,9 @@ tr:nth-child(even) {
 	<br>
 	<div align="center">
             <?php
-            $sql = "SELECT num, ip, hostname, date FROM IPlog ORDER BY num DESC";
-            $result = $conn->query($sql);
+            $sql = "SELECT num, ip, hostname, date FROM iplog ORDER BY num DESC";
+	    $result = $conn->query($sql);
+	    if ($conn->error) error_log($conn->error);
             echo "<table style=\"margin-top: -122px;width:1100px;float:center\"><tr><th style=\"width:10px\">Num</th><th>IP</th><th>Hostname</th><th style=\"width:130px\">Date</th><th style=\"width:60px\">Delete?</th></tr>";
             while ($row = $result->fetch_assoc()) {
                 echo "<tr><td>" . $row["num"] . "</td><td style=\"color:green\">" . $row["ip"] . "</td><td>" . $row["hostname"] . "</td><td>" . $row["date"] . "</td><td><a style=\"color: red\" href=removeip?num=" . $row["num"] . ">DELETE</a></td></tr>";

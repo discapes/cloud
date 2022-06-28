@@ -9,14 +9,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows == 0) {
-    try { $hostname = $_SERVER['REMOTE_HOST']; 
-    } catch (Exception $e) {
-        
-    }
+    $hostname = $_SERVER['REMOTE_HOST'] ?? $_SERVER['REMOTE_ADDR']; 
     $date = date("H:i d.m.Y");
     $stmt = $conn->prepare("INSERT INTO IPlog (ip,hostname,date) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $ip, $hostname, $date);
     $stmt->execute();
+    if ($conn->error) error_log($conn->error);
 }
 $conn->close();
 ?>

@@ -1,17 +1,17 @@
 # cloud
 A simple file hosting site that also works as a pastebin. Features include an ip logger, download links, text editing, listing files and temporarily trashing them. Also handles dates.
 
-- requires mysql, php7, apache and mod_rewrite
+- requires mysql, php7, apache
 
 ```
 CREATE DATABASE clouddb;
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
-ON cloud.*
-TO oispaeliitti@localhost
+ON clouddb.*
+TO cloud@localhost
 IDENTIFIED BY 'password123!';
 FLUSH PRIVILEGES;	
 
-CREATE TABLE `deliplog` (
+CREATE TABLE `DelIPlog` (
  `num` int(11) NOT NULL AUTO_INCREMENT,
  `ip` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL,
  `hostname` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `deliplog` (
  PRIMARY KEY (`num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci
 
-CREATE TABLE `files` (
+CREATE TABLE `Files` (
  `num` int(11) NOT NULL AUTO_INCREMENT,
  `id` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
  `filename` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE `files` (
  PRIMARY KEY (`num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci
 
-CREATE TABLE `iplog` (
+CREATE TABLE `IPlog` (
  `num` int(11) NOT NULL AUTO_INCREMENT,
  `ip` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL,
  `hostname` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `iplog` (
  PRIMARY KEY (`num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci
 
-CREATE TABLE `trash` (
+CREATE TABLE `Trash` (
  `num` int(11) NOT NULL AUTO_INCREMENT,
  `id` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
  `filename` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -51,4 +51,4 @@ Remember to create directories `files` and `trash`, then `git update-index --ass
 
 Just do `AllowOverride FileInfo AuthConfig`, `Options FollowSymLinks` and `HostnameLookups On`.
 
-Finally, edit `variables.php` to fit your server.
+Finally, edit `variables.php` and `admin/.htaccess` to fit your server.

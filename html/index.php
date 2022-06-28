@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 
+<?php
+    require 'logip.php';
+?>
+
 <head>
   <title>Site 58</title>
   <link rel="icon" type="image/png" href="favicon.png">
