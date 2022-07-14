@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
-a:link {
+a:link, .green {
 	color: green;
 	background-color: transparent;
 	text-decoration: none;
@@ -65,11 +65,12 @@ tr:nth-child(even) {
             <?php
             $sql = "SELECT num, id, filename, date, isPaste FROM Trash ORDER BY num desc";
             $result = $conn->query($sql);
-            echo "<table style=\"margin-top: -122px;width:1100px;float:center\"><tr><th style=\"width:10px\">Num</tf><th>UUID (<span style=\"color: green\">link to file</span>)</th><th>Filename (<span style=\"color: sienna\">edit file</span>)</th><th style=\"width:130px\">Date</th><th style=\"width:70px\">Restore?</th><th style=\"width:55px\">Type</th></tr>";
+            echo "<table style=\"width:1px;table-layout:fixed;position: absolute;left:135px;top:10px;\"><tr><th style=\"width:30px\">Num</tf><th style=\"width:300px\">UUID (<span style=\"color: green\">link to file</span>)</th><th style=\"width:180px\">Filename (<span style=\"color: sienna\">edit as text</span>)</th><th style=\"width:130px\">Date</th><th style=\"width:75px\">Restore?</th><th style=\"width:55px\">Type</th></tr>";
             while ($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["num"] . "</td><td><a href=\"gettrash?id=" . $row["id"] . "\">" . $row["id"] . "</a></td><td><a style=\"color: sienna\" href=\"newdelpaste?filename=" . $row["filename"] . "\">" . $row["filename"] . "</a></td><td>" . $row["date"] . "</td><td><a style=\"color: blue\" href=restorefile?num=" . $row["num"] . ">RESTORE</a></td><td>";
+                echo "<tr><td>" . $row["num"] . "</td><td><a class=\"green\" onclick=\"alert('Can\'t access deleted files in demo')\">" . $row["id"] . "</a></td><td><a style=\"color: sienna\" onclick=\"alert('Can\'t access deleted files in demo')\">" . $row["filename"] . "</a></td><td>" . $row["date"] . "</td><td><a style=\"color: blue\" href=restorefile?num=" . $row["num"] . ">RESTORE</a></td><td>";
                 if ($row["isPaste"]) {
-                    echo '<a href="changedeltype?num=' . $row["num"] . '&type=file" style="color:blue">PASTE</a>';
+                    echo '<a href="changedeltype?num=' . $row["num"] . '&type=file" style="color:blue">TEXT</a>';
+
                 } else {
                     echo '<a href="changedeltype?num=' . $row["num"] . '&type=paste" style="color:darkgreen">FILE</a>';
                 }

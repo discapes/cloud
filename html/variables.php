@@ -1,5 +1,5 @@
 <?php
 	$rootdir = "/var/cloud/";
 	$separator = "/";
-	$serverurl = "clouddemo.sudosimple.com";
+	$serverurl = "clouddemo.miikat.dev";
 ?>
